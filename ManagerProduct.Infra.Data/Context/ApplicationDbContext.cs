@@ -1,4 +1,6 @@
+using ManagerProduct.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+namespace ManagerProduct.Infra.Data.Context;
 
 public class ApplicationDbContext : DbContext
 {

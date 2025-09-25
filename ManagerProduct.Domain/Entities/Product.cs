@@ -1,3 +1,4 @@
+namespace ManagerProduct.Domain.Entities;
 public sealed class Product : Entity
 {
     public string Name { get; private set; }

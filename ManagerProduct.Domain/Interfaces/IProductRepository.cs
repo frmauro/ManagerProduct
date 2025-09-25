@@ -1,3 +1,6 @@
+using ManagerProduct.Domain.Entities;
+
+namespace ManagerProduct.Domain.Interfaces;
 public interface IProductRepository
 {
     Task<IEnumerable<Product>> GetAllAsync();
