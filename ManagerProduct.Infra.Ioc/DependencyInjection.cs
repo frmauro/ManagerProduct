@@ -1,4 +1,7 @@
 using CleanArchMvc.Infra.Data.Repositories;
+using ManagerProduct.Application.Interfaces;
+using ManagerProduct.Application.Mappings;
+using ManagerProduct.Application.Services;
 using ManagerProduct.Domain.Interfaces;
 using ManagerProduct.Infra.Data.Context;
 using ManagerProduct.Infra.Data.Repositories;
@@ -19,12 +22,11 @@ public static class DependencyInjection
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(5, 7)),
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-        // services.AddDbContext<ApplicationDbContext>(options =>
-        //  options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"
-        // ), b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddAutoMapper(cfg => { }, typeof(DomainToDTOMappingProfile));
 
         return services;
     }

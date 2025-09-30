@@ -1,21 +1,26 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ManagerProduct.WebUI.Models;
+using ManagerProduct.Application.Interfaces;
 
 namespace ManagerProduct.WebUI.Controllers;
 
-public class HomeController : Controller
+public class CategoriesController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<CategoriesController> _logger;
+    private readonly ICategoryService _categoryService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public CategoriesController(ILogger<CategoriesController> logger,
+    ICategoryService categoryService)
     {
         _logger = logger;
+        _categoryService = categoryService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var categories = await _categoryService.GetAllAsync();
+        return View(categories);
     }
 
     public IActionResult Privacy()
